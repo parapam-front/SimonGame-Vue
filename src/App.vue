@@ -14,12 +14,12 @@
 			</div>
 			<div class="game-info">
 				<h2>Round: <span >{{turn}}</span></h2>
-				<button class="start" :disabled="buttonFreezed"  @click="startMeth">Start</button>
+				<button class="start" :disabled="buttonFreezed || complexity === 0"  @click="startMeth">Start</button>
 				<p v-show="lose">Sorry, you lost after <span >{{rounds}}</span> rounds!</p>
 			</div>
 			<div class="game-options">
 				<h2>Game Options:</h2>
-				<input type="radio" name="mode" :disabled="buttonFreezed" :value="complexity"  v-model="complexity">1,5<br>
+				<input type="radio" name="mode" :disabled="buttonFreezed" value="1500"  v-model="complexity">1,5<br>
 				<input type="radio" name="mode" :disabled="buttonFreezed" value="1000" v-model="complexity">1,0<br>
 				<input type="radio" name="mode" :disabled="buttonFreezed" value="400" v-model="complexity">0,4<br>
 			</div>
@@ -54,7 +54,7 @@ export default {
 			blue: false,
 			yellow: false,
 			green: false,
-			complexity: 1500,
+			complexity: 0,
 			order: [],
 			playerOrder: [],
 			flash: null,
@@ -152,40 +152,52 @@ export default {
 			this.green = true
 		},
 		oneClick(){
-			this.playerOrder.push(1)
+			if(!this.compTurn){
+				this.playerOrder.push(1)
 			this.check()
 			this.one()
 			setTimeout(() => {
 				this.clearColor()
 			}, 300);
+			}
+			
 		},
 		twoClick(){
-			this.playerOrder.push(2)
+			if(!this.compTurn){
+				this.playerOrder.push(2)
 			this.check()
 			this.two()
 			setTimeout(() => {
 				this.clearColor()
 			}, 300);
+			}
+			
 		},
 		threeClick(){
-			this.playerOrder.push(3)
+			if(!this.compTurn){
+				this.playerOrder.push(3)
 			this.check()
 			this.three()
 			setTimeout(() => {
 				this.clearColor()
 			}, 300);
+			}
+			
 		},
 		fourClick(){
-			this.playerOrder.push(4)			
+			if(!this.compTurn){
+				this.playerOrder.push(4)			
 			this.check()
 			this.four()
 			setTimeout(() => {
 				this.clearColor()
-			}, 300);			
+			}, 300);	
+			}
+					
 		},
 		check(){
 			if (this.playerOrder[this.playerOrder.length -1] !== this.order[this.playerOrder.length-1])
-				this.good = false
+				{this.good = false}
 				
 			if (this.good == false) {
 				this.flashColor();
