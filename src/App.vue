@@ -54,7 +54,7 @@ export default {
 			blue: false,
 			yellow: false,
 			green: false,
-			complexity: 800,
+			complexity: 1500,
 			order: [],
 			playerOrder: [],
 			flash: null,
@@ -207,7 +207,7 @@ export default {
 		}
 	},
 	mounted(){
-
+		console.log(this.complexity);
 	}
 }
 </script>
